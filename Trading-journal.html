@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Trading Journal</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+      padding: 20px;
+    }
+    .container {
+      max-width: 800px;
+      margin: auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h2 {
+      text-align: center;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 10px;
+      text-align: center;
+    }
+    th {
+      background-color: #4CAF50;
+      color: white;
+    }
+    input, select {
+      width: 100%;
+      padding: 8px;
+      margin: 5px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    button {
+      padding: 10px;
+      background: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Trading Journal</h2>
+    <form id="tradeForm">
+      <label>Date</label>
+      <input type="date" id="date" required />
+      <label>Pair</label>
+      <input type="text" id="pair" placeholder="e.g. GBP/USD" required />
+      <label>Direction</label>
+      <select id="direction">
+        <option value="Buy">Buy</option>
+        <option value="Sell">Sell</option>
+      </select>
+      <label>Lot Size</label>
+      <input type="number" id="lot" step="0.01" required />
+      <label>Entry Price</label>
+      <input type="number" id="entry" step="0.0001" required />
+      <label>Exit Price</label>
+      <input type="number" id="exit" step="0.0001" required />
+      <label>P/L ($)</label>
+      <input type="number" id="pl" step="0.01" required />
+      <label>Notes</label>
+      <input type="text" id="notes" placeholder="What went well or not..." />
+      <button type="submit">Add Trade</button>
+    </form>
+
+    <table id="journal">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Pair</th>
+          <th>Direction</th>
+          <th>Lot</th>
+          <th>Entry</th>
+          <th>Exit</th>
+          <th>P/L ($)</th>
+          <th>Notes</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+
+  <script>
+    document.getElementById('tradeForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const table = document.getElementById('journal').getElementsByTagName('tbody')[0];
+      const row = table.insertRow();
+
+      row.insertCell(0).innerText = document.getElementById('date').value;
+      row.insertCell(1).innerText = document.getElementById('pair').value;
+      row.insertCell(2).innerText = document.getElementById('direction').value;
+      row.insertCell(3).innerText = document.getElementById('lot').value;
+      row.insertCell(4).innerText = document.getElementById('entry').value;
+      row.insertCell(5).innerText = document.getElementById('exit').value;
+      row.insertCell(6).innerText = document.getElementById('pl').value;
+      row.insertCell(7).innerText = document.getElementById('notes').value;
+
+      document.getElementById('tradeForm').reset();
+    });
+  </script>
+</body>
+</html>
